@@ -26,19 +26,11 @@ pipeline {
    
     stages {
         stage ('Compile'){
-            steps { 
-                withMaven(maven: 'mvn'){
-                    sh 'mvn clean compile'
-                }            
-            }        
+            sh 'mvn -Dmaven.test.failure.ignore clean package'                    
         }
 
         stage ('Test'){
-            steps {
-                withMaven(maven: 'mvn'){
-                    sh 'mvn test'
-                }            
-            }        
+            sh 'mvn test'      
         }
     
     }
