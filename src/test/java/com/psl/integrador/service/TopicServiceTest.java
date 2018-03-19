@@ -82,9 +82,9 @@ public class TopicServiceTest {
         t1.setDescription("Description 1");
         t1.setStatus(toOpen);
         Topic t2 = topicService.add(t1);
-        t2.setName("Topic 2");
-        t2.setDescription("Description 2");
-        t2.setStatus(opened);
+        t2.setName("Topic 1");
+        t2.setDescription("Description 1");
+        t2.setStatus(toOpen);
 
         try {
             assertThat(t2, samePropertyValuesAs(topicService.update(t2)));
