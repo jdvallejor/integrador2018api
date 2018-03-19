@@ -20,11 +20,9 @@
 //        }
 //    }
 //}
-pipeline {
+node {
 
-    agent any
    
-    stages {
         stage ('Compile'){
             sh 'mvn -Dmaven.test.failure.ignore clean package'                    
         }
@@ -32,8 +30,7 @@ pipeline {
         stage ('Test'){
             sh 'mvn test'      
         }
-    
-    }
+
 }
  
 //   stage('Build') {
