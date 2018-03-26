@@ -54,7 +54,7 @@ public class NotificationServiceImpl implements NotificationService {
 
     private static final String BODY_CLOSED =
             "Hola %name%" +
-                    "\n\nQueremos informarte que el grupo %topic% se ha cerrado, si consideras que debería reactivarse, excríbenos a: %mail%." +
+                    "\n\nQueremos informarte que el grupo %topic% se ha cerrado, si consideras que debería reactivarse, escríbenos a: %mail%." +
                     "\n\nTe invitamos a inscribirte a otros grupos activos" +
                     "\n\nLogistica actividades PSL";
     private final CollaboratorService collaboratorService;
