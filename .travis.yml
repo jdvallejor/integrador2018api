@@ -1,0 +1,13 @@
+language: java
+before_install:
+  - chmod +x mvnw
+script:
+  - "mvn test"
+deploy:
+  provider: heroku
+  api_key:
+    secure: 55f05f85-8553-47a3-9b6e-b344cc5da044
+  app: integrador2018
+  on:
+    repo: jdvallejor/integrador2018api
+

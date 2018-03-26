@@ -2,25 +2,27 @@ package com.psl.integrador.service;
 
 import com.psl.integrador.exception.EntityNotFoundException;
 import com.psl.integrador.model.Topic;
+import com.psl.integrador.model.enums.NotificationType;
 import com.psl.integrador.model.enums.Status;
 import com.psl.integrador.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Service
 public class TopicServiceImpl implements TopicService {
 
+    private static final Logger LOGGER = Logger.getLogger(TopicServiceImpl.class.getName());
+
     private final TopicRepository topicRepository;
-    private final CollaboratorService collaboratorService;
     private final NotificationService notificationService;
 
     @Autowired
-    public TopicServiceImpl(TopicRepository topicRepository, CollaboratorService collaboratorService,
-                            NotificationService notificationService) {
+    public TopicServiceImpl(TopicRepository topicRepository, NotificationService notificationService) {
         this.topicRepository = topicRepository;
-        this.collaboratorService = collaboratorService;
         this.notificationService = notificationService;
     }
 
@@ -47,21 +49,18 @@ public class TopicServiceImpl implements TopicService {
             throw new EntityNotFoundException(String.format("Topic with id: %s was not found", topic.getId()));
 
         if (topic.getStatus() != dbTopic.getStatus()) {
-            int tipo;
-            if(dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.opened){
-                //abierto
-                tipo = 1;
-            }else if (dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.closed){
-                //nunca abrio
-                tipo = 2;
-            }else{
-                //cerro un grupo abierto
-                tipo =3;
+            NotificationType notificationType;
+            if (dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.opened) {
+                notificationType = NotificationType.open;
+            } else if (dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.closed) {
+                notificationType = NotificationType.neverOpened;
+            } else {
+                notificationType = NotificationType.closed;
             }
             dbTopic.setStatus(topic.getStatus());
 
             //Send notifications to all collaborators
-            sendNotification(topic,tipo);
+            sendNotifications(topic, notificationType);
         }
 
         dbTopic.setChat(topic.getChat());
@@ -74,15 +73,15 @@ public class TopicServiceImpl implements TopicService {
         return topicRepository.findTopicById(id);
     }
 
-    private void sendNotification(Topic topic,int tipo) {
+    private void sendNotifications(Topic topic, NotificationType notificationType) {
 
         new Thread(() -> {
             try {
                 Thread.sleep(1000);
-                notificationService.sendNotification(collaboratorService.getCollaboratorsByTopic(topic),topic, tipo);
+                notificationService.sendNotifications(topic, notificationType);
 
             } catch (Exception e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, e.toString());
             }
         }).start();
 
