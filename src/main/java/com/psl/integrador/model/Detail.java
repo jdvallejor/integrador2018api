@@ -3,14 +3,10 @@ package com.psl.integrador.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.psl.integrador.model.enums.Expertise;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
 public class Detail {
-
-    @Id
-    private int id;
 
     @NotEmpty(message = "Topic cannot be empty")
     private Topic topic;
@@ -18,23 +14,17 @@ public class Detail {
     @NotEmpty(message = "Expertise cannot be empty")
     private Expertise expertise;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime createdAt;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-M-d H:m:s")
+    private LocalDateTime addedAt;
 
     public Detail() {
         super();
     }
 
-    public Detail(int id, Topic topic, Expertise expertise) {
-        this.id = id;
+    private Detail(Topic topic, Expertise expertise, LocalDateTime addedAt) {
         this.topic = topic;
         this.expertise = expertise;
-    }
-
-    private Detail(Topic topic, Expertise expertise, LocalDateTime createdAt) {
-        this.topic = topic;
-        this.expertise = expertise;
-        this.createdAt = createdAt;
+        this.addedAt = addedAt;
     }
 
     Detail(Topic topic, Expertise expertise) {
@@ -57,11 +47,11 @@ public class Detail {
         this.expertise = expertise;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getAddedAt() {
+        return addedAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setAddedAt(LocalDateTime addedAt) {
+        this.addedAt = addedAt;
     }
 }
