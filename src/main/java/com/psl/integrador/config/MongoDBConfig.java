@@ -21,7 +21,7 @@ public class MongoDBConfig {
     CommandLineRunner commandLineRunner(TopicRepository topicRepository, CollaboratorRepository collaboratorRepository) {
         return strings -> {
 
-            collaboratorRepository.deleteAll();
+            /*collaboratorRepository.deleteAll();
             topicRepository.deleteAll();
 
             List<Topic> listTopics = new ArrayList<>();
@@ -103,7 +103,7 @@ public class MongoDBConfig {
             c2.addTopicToLearn(t4, Expertise.expert);
 
             collaboratorRepository.save(c1);
-            collaboratorRepository.save(c2);
+            collaboratorRepository.save(c2);*/
         };
     }
 
