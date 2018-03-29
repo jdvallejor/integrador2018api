@@ -1,11 +1,17 @@
 package com.psl.integrador.config;
 
+import com.psl.integrador.model.Collaborator;
+import com.psl.integrador.model.Topic;
+import com.psl.integrador.model.enums.Expertise;
 import com.psl.integrador.repository.CollaboratorRepository;
 import com.psl.integrador.repository.TopicRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @EnableMongoRepositories(basePackageClasses = {TopicRepository.class, CollaboratorRepository.class})
 @Configuration
@@ -15,7 +21,7 @@ public class MongoDBConfig {
     CommandLineRunner commandLineRunner(TopicRepository topicRepository, CollaboratorRepository collaboratorRepository) {
         return strings -> {
 
-            /*collaboratorRepository.deleteAll();
+            collaboratorRepository.deleteAll();
             topicRepository.deleteAll();
 
             List<Topic> listTopics = new ArrayList<>();
@@ -97,7 +103,7 @@ public class MongoDBConfig {
             c2.addTopicToLearn(t4, Expertise.expert);
 
             collaboratorRepository.save(c1);
-            collaboratorRepository.save(c2);*/
+            collaboratorRepository.save(c2);
         };
     }
 
