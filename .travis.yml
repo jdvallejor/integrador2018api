@@ -7,7 +7,8 @@ deploy:
   provider: heroku
   api_key:
     secure: c2c4954e-58e8-4839-96c3-1536a132abc9
-  app: integrador2018apitesting
+  app:
+    master: integrador2018api
+    test: integrador2018apitesting
   on:
     repo: jdvallejor/integrador2018api
-
