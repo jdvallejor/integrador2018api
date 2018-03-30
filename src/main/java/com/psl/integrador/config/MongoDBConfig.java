@@ -22,7 +22,7 @@ public class MongoDBConfig {
         return strings -> {
 
             /*collaboratorRepository.deleteAll();
-            topicRepository.deleteAll(); 
+            topicRepository.deleteAll();
 
             List<Topic> listTopics = new ArrayList<>();
             Topic t1 = new Topic("Java", "Java test");
