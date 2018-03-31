@@ -38,7 +38,7 @@ public class EP326Steps {
     }
 
     private JSONArray getTopicsByStatus(int status) throws IOException {
-        String dirGet = "https://integrador2018.herokuapp.com/topics/findByStatus?status=";
+        String dirGet = "https://integrador2018apitest.herokuapp.com/topics/findByStatus?status=";
         HttpGet request = new HttpGet(dirGet + status);
         request.addHeader("accept", "application/json");
         HttpResponse httpResponse = httpClient.execute(request);
@@ -48,7 +48,7 @@ public class EP326Steps {
     }
 
     private JSONObject patchTopic(JSONObject patchTopic) throws IOException {
-        String dirPatch = "https://integrador2018.herokuapp.com/topics";
+        String dirPatch = "https://integrador2018apitest.herokuapp.com/topics";
         HttpPatch request = new HttpPatch(dirPatch);
         StringEntity entity = new StringEntity(patchTopic.toString());
         request.addHeader("content-type", "application/json");
