@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 public class EP326Steps {
 
@@ -69,28 +70,28 @@ public class EP326Steps {
         return contained;
     }
 
-    @Given("^the api have already topics with status (\\d+)$")
+    @Given(value = "^the api have already topics with status (\\d+)$")
     public void theApiHaveAlreadyTopicsWithStatus(int arg0) throws Throwable {
         JSONArray topicArray = getTopicsByStatus(arg0);
-        assertEquals(true, topicArray.length()>0);
+        assertTrue(topicArray.length() > 0);
         topic = topicArray.getJSONObject(0);
     }
 
-    @When("^I send a patch request to change the status to (\\d+)$")
+    @When(value = "^I send a patch request to change the status to (\\d+)$")
     public void iSendAPatchRequestToChangeTheStatusTo(int arg0) throws Throwable {
         newTopic = new JSONObject(topic.toString());
         newTopic.put("status",arg0);
         newTopic = patchTopic(newTopic);
     }
 
-    @Then("^The topic must be updated correctly$")
+    @Then(value = "^The topic must be updated correctly$")
     public void theTopicMustBeUpdatedCorrectly() throws Throwable {
         assertEquals(newTopic.get("id"),topic.get("id"));
     }
 
-    @And("^must be stored in the database as a topic with status (\\d+)$")
+    @And(value = "^must be stored in the database as a topic with status (\\d+)$")
     public void mustBeStoredInTheDatabaseAsATopicWithStatus(int arg0) throws Throwable {
         JSONArray topicsArray = getTopicsByStatus(arg0);
-        assertEquals(true, isContained(newTopic,topicsArray));
+        assertTrue(isContained(newTopic, topicsArray));
     }
 }
