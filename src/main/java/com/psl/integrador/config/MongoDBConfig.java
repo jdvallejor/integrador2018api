@@ -70,12 +70,59 @@ public class MongoDBConfig {
             Topic t15 = new Topic("Xamarin", "Xamarin Test");
             t15.setTeachers(1);
             t15.setStudents(3);
+            Topic t16 = new Topic("R", "R test");
+            t16.setTeachers(2);
+            t16.setStudents(12);
+            Topic t17 = new Topic("Groovy", "Groovy Test");
+            t17.setTeachers(1);
+            t17.setStudents(5);
+            Topic t18 = new Topic("PowerShell", "PowerShell Test");
+            t18.setTeachers(2);
+            t18.setStudents(16);
+            Topic t19 = new Topic("Perl", "Perl Test");
+            t19.setTeachers(0);
+            t19.setStudents(3);
+            Topic t20 = new Topic("Kotlin", "Kotlin Test");
+            t20.setTeachers(0);
+            t20.setStudents(2);
+            Topic t21 = new Topic("OCaml", "OCaml Test");
+            t21.setTeachers(1);
+            t21.setStudents(16);
+            Topic t22 = new Topic("Matlab", "Matlab Test");
+            t22.setTeachers(2);
+            t22.setStudents(8);
+            Topic t23 = new Topic("PureScript", "PureScript Test");
+            t23.setTeachers(1);
+            t23.setStudents(5);
+            Topic t24 = new Topic("Fortran", "Fortran Test");
+            t24.setTeachers(1);
+            t24.setStudents(4);
+            Topic t25 = new Topic("Gherkin", "Gherkin Test");
+            t25.setTeachers(0);
+            t25.setStudents(2);
+            Topic t26 = new Topic("Assembly", "Assembly Test");
+            t26.setTeachers(3);
+            t26.setStudents(11);
+            Topic t27 = new Topic("Crystal", "Crystal Test");
+            t27.setTeachers(0);
+            t27.setStudents(1);
+            Topic t28 = new Topic("Swift", "Swift Test");
+            t28.setTeachers(0);
+            t28.setStudents(4);
+            Topic t29 = new Topic("CoffeeScript", "CoffeeScript Test");
+            t29.setTeachers(0);
+            t29.setStudents(15);
+            Topic t30 = new Topic("Groovy", "Groovy Test");
+            t30.setTeachers(1);
+            t30.setStudents(3);
+
 
 
             listTopics.add(t1);
             listTopics.add(t2);
             listTopics.add(t3);
             listTopics.add(t4);
+            listTopics.add(t5);
             listTopics.add(t6);
             listTopics.add(t7);
             listTopics.add(t8);
@@ -86,6 +133,20 @@ public class MongoDBConfig {
             listTopics.add(t13);
             listTopics.add(t14);
             listTopics.add(t15);
+            listTopics.add(t16);
+            listTopics.add(t17);
+            listTopics.add(t18);
+            listTopics.add(t19);
+            listTopics.add(t21);
+            listTopics.add(t22);
+            listTopics.add(t23);
+            listTopics.add(t24);
+            listTopics.add(t25);
+            listTopics.add(t26);
+            listTopics.add(t27);
+            listTopics.add(t28);
+            listTopics.add(t29);
+            listTopics.add(t30);
 
             topicRepository.save(listTopics);
 
@@ -93,14 +154,14 @@ public class MongoDBConfig {
             c1.setName("Jose");
             c1.setEmail("josedavidrestrepoduque@gmail.com");
             c1.addTopicToTeach(t1, Expertise.beginner);
-            c1.addTopicToLearn(t2, Expertise.expert);
+            c1.addTopicToLearn(t17, Expertise.expert);
 
             Collaborator c2 = new Collaborator();
             c2.setName("Juan");
             c2.setEmail("josedavidrestrepoduque@gmail.com");
             c2.addTopicToLearn(t1, Expertise.beginner);
-            c2.addTopicToTeach(t3, Expertise.intermediate);
-            c2.addTopicToLearn(t4, Expertise.expert);
+            c2.addTopicToTeach(t18, Expertise.intermediate);
+            c2.addTopicToLearn(t19, Expertise.expert);
 
             collaboratorRepository.save(c1);
             collaboratorRepository.save(c2);
