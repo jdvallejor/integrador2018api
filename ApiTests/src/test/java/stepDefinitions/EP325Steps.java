@@ -54,6 +54,7 @@ public class EP325Steps {
                 JSONObject group = groups.getJSONObject(i);
                 assertEquals(0, group.getInt("status"));
                 assertTrue(group.get("chat").equals(null));
+                assertFalse(group.get("createdAt").equals(null));
                 assertTrue(group.get("openedAt").equals(null));
                 assertTrue(group.get("closedAt").equals(null));
             }
@@ -62,15 +63,16 @@ public class EP325Steps {
                 JSONObject group = groups.getJSONObject(i);
                 assertEquals(1, group.getInt("status"));
                 assertFalse(group.get("chat").equals(null));
-                assertFalse(group.getString("openedAt").equals(null));
-                assertTrue(group.getString("closedAt").equals(null));
+                assertFalse(group.get("createdAt").equals(null));
+                assertFalse(group.get("openedAt").equals(null));
+                assertTrue(group.get("closedAt").equals(null));
             }
         }else{
             for(i=0; i < groups.length(); i++){
                 JSONObject group = groups.getJSONObject(i);
                 assertEquals(2, group.getInt("status"));
-                assertTrue(group.get("chat").equals(null));
-                assertFalse(group.getString("closedAt").equals(null));
+                assertFalse(group.get("createdAt").equals(null));
+                assertFalse(group.get("closedAt").equals(null));
             }
         }
     }
