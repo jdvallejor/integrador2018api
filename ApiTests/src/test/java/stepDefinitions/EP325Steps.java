@@ -4,7 +4,7 @@
     Made by Jenny Marcela Zapata Pulgarín
 */
 
-package test.ep325;
+package stepDefinitions;
 
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -24,7 +24,7 @@ import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.assertFalse;
 
 
-public class EP325Defs {
+public class EP325Steps {
 
     CloseableHttpClient httpClient= HttpClients.createDefault();
     int responseCode;
