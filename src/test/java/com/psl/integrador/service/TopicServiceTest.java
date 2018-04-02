@@ -60,7 +60,7 @@ public class TopicServiceTest {
         t4.setStatus(closed);
         topicService.add(t4);
 
-        assertEquals(2, topicService.getTopicsByStatus(closed.ordinal()).size());
+        assertEquals(3, topicService.getTopicsByStatus(closed.ordinal()).size());
        // assertEquals(1, topicService.getTopicsByStatus(opened.ordinal()).size());
        // assertEquals(1, topicService.getTopicsByStatus(toOpen.ordinal()).size());
     }
