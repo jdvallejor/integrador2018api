@@ -24,6 +24,7 @@ public class MongoDBConfig {
 
             collaboratorRepository.deleteAll();
             topicRepository.deleteAll();
+            
 
             List<Topic> listTopics = new ArrayList<>();
             Topic t1 = new Topic("Java", "Java test");
