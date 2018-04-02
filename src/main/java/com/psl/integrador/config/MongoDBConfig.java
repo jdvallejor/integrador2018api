@@ -117,7 +117,7 @@ public class MongoDBConfig {
             t30.setTeachers(1);
             t30.setStudents(3);
             
-            t29.setStatus(Status.open);
+            t29.setStatus(Status.opened);
             t30.setStatus(Status.closed);
 
             listTopics.add(t1);
