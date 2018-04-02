@@ -12,5 +12,6 @@ To execute the test you must follow these steps:
 
 Who made which test:
  - EP-326: John Bryan Yepez Herrera
+ - EP-325: Jenny Marcela Zapata Pulgarín
 
 **By : Universidad Nacional Team**
