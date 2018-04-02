@@ -115,8 +115,9 @@ public class MongoDBConfig {
             Topic t30 = new Topic("Groovy", "Groovy Test");
             t30.setTeachers(1);
             t30.setStudents(3);
-
-
+            
+            t29.setStatus(Status.open);
+            t30.setStatus(Status.closed);
 
             listTopics.add(t1);
             listTopics.add(t2);
