@@ -69,8 +69,7 @@ public class EP325Steps {
             for(i=0; i < groups.length(); i++){
                 JSONObject group = groups.getJSONObject(i);
                 assertEquals(2, group.getInt("status"));
-                assertFalse(group.get("chat").equals(null));
-                assertFalse(group.getString("openedAt").equals(null));
+                assertTrue(group.get("chat").equals(null));
                 assertFalse(group.getString("closedAt").equals(null));
             }
         }
