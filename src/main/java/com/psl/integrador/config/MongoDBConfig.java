@@ -3,6 +3,7 @@ package com.psl.integrador.config;
 import com.psl.integrador.model.Collaborator;
 import com.psl.integrador.model.Topic;
 import com.psl.integrador.model.enums.Expertise;
+import com.psl.integrador.model.enums.Status;
 import com.psl.integrador.repository.CollaboratorRepository;
 import com.psl.integrador.repository.TopicRepository;
 import org.springframework.boot.CommandLineRunner;
