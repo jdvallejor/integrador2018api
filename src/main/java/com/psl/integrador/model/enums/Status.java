@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 
 public enum Status implements Serializable {
-    toOpen,
-    opened,
-    closed;
+    TO_OPEN,
+    OPENED,
+    CLOSED;
 
     @JsonValue
     public int toValue() {

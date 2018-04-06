@@ -71,10 +71,10 @@ public class NotificationServiceImpl implements NotificationService {
 
     private String buildSubject(String topicName, NotificationType notificationType) {
         switch (notificationType) {
-            case open:
+            case OPEN:
                 return SUBJECT_OPENED.replace("%topic%", topicName);
-            case closed:
-            case neverOpened:
+            case CLOSED:
+            case NEVER_OPENED:
                 return SUBJECT_CLOSED.replace("%topic%", topicName);
             default:
                 return null;
@@ -83,24 +83,24 @@ public class NotificationServiceImpl implements NotificationService {
 
     private String buildBody(String name, String topicName, String chat, Role role, NotificationType notificationType) {
         switch (notificationType) {
-            case open:
+            case OPEN:
                 switch (role) {
-                    case student:
+                    case STUDENT:
                         return BODY_LEARNING.replace("%name%", name)
                                 .replace("%topic%", topicName)
                                 .replace("%chat%", chat)
                                 .replace("%mail%", FROM_EMAIL);
-                    case teacher:
+                    case TEACHER:
                         return BODY_GUIDING.replace("%name%", name)
                                 .replace("%topic%", topicName)
                                 .replace("%chat%", chat)
                                 .replace("%mail%", FROM_EMAIL);
                 }
-            case neverOpened:
+            case NEVER_OPENED:
                 return BODY_NEVER_OPENED.replace("%name%", name)
                         .replace("%topic%", topicName)
                         .replace("%mail%", FROM_EMAIL);
-            case closed:
+            case CLOSED:
                 return BODY_CLOSED.replace("%name%", name)
                         .replace("%topic%", topicName)
                         .replace("%mail%", FROM_EMAIL);

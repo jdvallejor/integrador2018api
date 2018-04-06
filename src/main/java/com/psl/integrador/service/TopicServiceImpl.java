@@ -50,12 +50,12 @@ public class TopicServiceImpl implements TopicService {
 
         if (topic.getStatus() != dbTopic.getStatus()) {
             NotificationType notificationType;
-            if (dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.opened) {
-                notificationType = NotificationType.open;
-            } else if (dbTopic.getStatus() == Status.toOpen && topic.getStatus() == Status.closed) {
-                notificationType = NotificationType.neverOpened;
+            if (dbTopic.getStatus() == Status.TO_OPEN && topic.getStatus() == Status.OPENED) {
+                notificationType = NotificationType.OPEN;
+            } else if (dbTopic.getStatus() == Status.TO_OPEN && topic.getStatus() == Status.CLOSED) {
+                notificationType = NotificationType.NEVER_OPENED;
             } else {
-                notificationType = NotificationType.closed;
+                notificationType = NotificationType.CLOSED;
             }
             dbTopic.setStatus(topic.getStatus());
 

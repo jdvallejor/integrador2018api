@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 @Service
 public class CollaboratorServiceImpl implements CollaboratorService {
@@ -37,12 +36,12 @@ public class CollaboratorServiceImpl implements CollaboratorService {
         for (Collaborator collaborator : getCollaborators()) {
             for (Detail detail : collaborator.getTopicsToLearn()) {
                 if (detail.getTopic().getId().equals(topic.getId())) {
-                    collaboratorIntegerMap.put(collaborator, Role.student);
+                    collaboratorIntegerMap.put(collaborator, Role.STUDENT);
                 }
             }
             for (Detail detail : collaborator.getTopicsToTeach()) {
                 if (detail.getTopic().getId().equals(topic.getId())) {
-                    collaboratorIntegerMap.put(collaborator, Role.teacher);
+                    collaboratorIntegerMap.put(collaborator, Role.TEACHER);
                 }
             }
         }

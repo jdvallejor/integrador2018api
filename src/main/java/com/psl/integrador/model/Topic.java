@@ -49,7 +49,7 @@ public class Topic {
     }
 
     public Topic(String name, String description) {
-        this(name, description, Status.toOpen, LocalDateTime.now());
+        this(name, description, Status.TO_OPEN, LocalDateTime.now());
     }
 
     public String getId() {
@@ -83,10 +83,10 @@ public class Topic {
     public void setStatus(Status status) {
 
         switch (status) {
-            case opened:
+            case OPENED:
                 this.setOpenedAt(LocalDateTime.now());
                 break;
-            case closed:
+            case CLOSED:
                 this.setClosedAt(LocalDateTime.now());
                 break;
         }

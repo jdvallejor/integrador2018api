@@ -18,14 +18,14 @@ public class ApiError {
         this.status = status;
     }
 
-    public void addError(String error) {
+    void addError(String error) {
         if (errors == null) {
             errors = new ArrayList<>();
         }
         errors.add(error);
     }
 
-    public List<String> getErrors() {
+    List<String> getErrors() {
         return errors;
     }
 

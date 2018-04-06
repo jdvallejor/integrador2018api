@@ -30,10 +30,10 @@ public class NotificationServiceImplTest {
         Map<Collaborator, Role> collaborators = new HashMap<>();
         Collaborator collaborator = new Collaborator();
         collaborator.setEmail("col1@samplemail.com");
-        collaborators.put(collaborator,Role.student);
+        collaborators.put(collaborator,Role.STUDENT);
         collaborator = new Collaborator();
         collaborator.setEmail("col2@samplemail.com");
-        collaborators.put(collaborator,Role.teacher);
+        collaborators.put(collaborator,Role.TEACHER);
 
         Mockito.when(collaboratorService.getCollaboratorsByTopic(new Topic()))
                 .thenReturn(collaborators);
@@ -47,7 +47,7 @@ public class NotificationServiceImplTest {
         for(int c = 0; c < 5; ++c){
             collaborator[c] = new Collaborator();
             collaborator[c].setEmail(c + "@mail.com");
-            collaborator[c].addTopicToLearn(topic, Expertise.beginner);
+            collaborator[c].addTopicToLearn(topic, Expertise.BEGINNER);
         }
         //Void function, test is only to verify there is no crash
         notificationService.sendNotifications(collaboratorService.getCollaboratorsByTopic(new Topic()),topic,1);

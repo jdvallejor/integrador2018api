@@ -3,9 +3,9 @@ package com.psl.integrador.model.enums;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum Expertise {
-    beginner,
-    intermediate,
-    expert;
+    BEGINNER,
+    INTERMEDIATE,
+    EXPERT;
 
     @JsonValue
     public int toValue() {

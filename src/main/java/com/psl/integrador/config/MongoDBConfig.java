@@ -92,15 +92,15 @@ public class MongoDBConfig {
             Collaborator c1 = new Collaborator();
             c1.setName("Jose");
             c1.setEmail("josedavidrestrepoduque@gmail.com");
-            c1.addTopicToTeach(t1, Expertise.beginner);
-            c1.addTopicToLearn(t2, Expertise.expert);
+            c1.addTopicToTeach(t1, Expertise.BEGINNER);
+            c1.addTopicToLearn(t2, Expertise.EXPERT);
 
             Collaborator c2 = new Collaborator();
             c2.setName("Juan");
             c2.setEmail("josedavidrestrepoduque@gmail.com");
-            c2.addTopicToLearn(t1, Expertise.beginner);
-            c2.addTopicToTeach(t3, Expertise.intermediate);
-            c2.addTopicToLearn(t4, Expertise.expert);
+            c2.addTopicToLearn(t1, Expertise.BEGINNER);
+            c2.addTopicToTeach(t3, Expertise.INTERMEDIATE);
+            c2.addTopicToLearn(t4, Expertise.EXPERT);
 
             collaboratorRepository.save(c1);
             collaboratorRepository.save(c2);*/
