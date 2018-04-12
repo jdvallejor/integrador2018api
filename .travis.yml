@@ -1,8 +1,14 @@
 language: java
 before_install:
   - chmod +x mvnw
+addons:
+ sonarcloud:
+    organization: "praxis_integrador"
+    token:
+      secure: SONAR_TOKEN
 script:
   - "mvn test"
+  - sonar-scanner
 deploy:
   provider: heroku
   api_key:
