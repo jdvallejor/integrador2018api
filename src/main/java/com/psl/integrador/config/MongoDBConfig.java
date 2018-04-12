@@ -160,8 +160,8 @@ public class MongoDBConfig {
             c1.addTopicToLearn(t17, Expertise.expert);
 
             Collaborator c2 = new Collaborator();
-            c2.setName("Juan");
-            c2.setEmail("josedavidrestrepoduque@gmail.com");
+            c2.setName("John");
+            c2.setEmail("Jbyepezh@unal.edu.co");
             c2.addTopicToLearn(t1, Expertise.beginner);
             c2.addTopicToTeach(t18, Expertise.intermediate);
             c2.addTopicToLearn(t19, Expertise.expert);
