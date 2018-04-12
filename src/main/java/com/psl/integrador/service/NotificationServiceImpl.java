@@ -28,37 +28,40 @@ public class NotificationServiceImpl implements NotificationService {
     private static final String SUBJECT_OPENED = "Nuevo grupo de %topic%!";
     private static final String SUBJECT_CLOSED = "El grupo de %topic% se ha cerrado";
 
+    private static final String HEADER_BODY = "Hola %name%";
+    private static final String FOOTER_BODY ="\n\nSi tienes alguna duda escribenos a: %mail%" +
+                    "\n\nLogistica actividades PSL";
+
     private static final String BODY_LEARNING =
-            "Hola %name%" +
+            HEADER_BODY +
                     "\n\nHace un tiempo nos comentaste tu interés en aprender %topic%, hemos creado un grupo en Skype " +
                     "para que compartas información con otras personas que también tienen interes en este tema." +
                     "\n\nAquí puedes acceder al grupo: %chat%" +
                     "\n\nAdicionalmente, estos compañeros te podrán proporcionar guía: " +
-                    "\n\nSi tienes alguna duda escribenos a: %mail%" +
-                    "\n\nLogistica actividades PSL";
+                    FOOTER_BODY;
 
     private static final String BODY_GUIDING =
-            "Hola %name%" +
+            HEADER_BODY +
                     "\n\nHace un tiempo nos comentaste tu interés en guiar en el tema %topic%, hemos creado un grupo en Skype " +
                     "para que ayudes a compañeros que tienen interés de aprender sobre este tema." +
                     "\n\nAquí puedes acceder al grupo: %chat%" +
-                    "\n\nSi tienes alguna duda escribenos a: %mail%" +
-                    "\n\nLogistica actividades PSL";
+                    FOOTER_BODY;
 
     private static final String BODY_NEVER_OPENED =
-            "Hola %name%" +
+            HEADER_BODY +
                     "\n\nHace un tiempo nos comentaste tu interés en el tema %topic%, lamentablemente no encontramos el número " +
                     "suficiente de personas para abrir el grupo. No te desanimes! Te invitamos a inscribirte a otros grupos ya activos." +
-                    "\n\nSi tienes alguna duda escribenos a: %mail%" +
-                    "\n\nLogistica actividades PSL";
+                    FOOTER_BODY;
 
     private static final String BODY_CLOSED =
-            "Hola %name%" +
+            HEADER_BODY +
                     "\n\nQueremos informarte que el grupo %topic% se ha cerrado, si consideras que debería reactivarse, escríbenos a: %mail%." +
                     "\n\nTe invitamos a inscribirte a otros grupos activos" +
-                    "\n\nLogistica actividades PSL";
+                    FOOTER_BODY;
+
     private final CollaboratorService collaboratorService;
     private Authenticator auth = new Authenticator() {
+        @Override
         protected PasswordAuthentication getPasswordAuthentication() {
             return new PasswordAuthentication(FROM_EMAIL, PASSWORD);
         }
@@ -81,31 +84,25 @@ public class NotificationServiceImpl implements NotificationService {
         }
     }
 
+    private String getBody(Role role, NotificationType notificationType){
+        if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.STUDENT))
+            return BODY_LEARNING;
+        else if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.TEACHER))
+            return BODY_GUIDING;
+        else if (notificationType.equals(NotificationType.NEVER_OPENED))
+            return BODY_NEVER_OPENED;
+        else if (notificationType.equals(NotificationType.CLOSED))
+            return BODY_CLOSED;
+        else
+            return "";
+    }
+
     private String buildBody(String name, String topicName, String chat, Role role, NotificationType notificationType) {
-        switch (notificationType) {
-            case OPEN:
-                switch (role) {
-                    case STUDENT:
-                        return BODY_LEARNING.replace("%name%", name)
-                                .replace("%topic%", topicName)
-                                .replace("%chat%", chat)
-                                .replace("%mail%", FROM_EMAIL);
-                    case TEACHER:
-                        return BODY_GUIDING.replace("%name%", name)
-                                .replace("%topic%", topicName)
-                                .replace("%chat%", chat)
-                                .replace("%mail%", FROM_EMAIL);
-                }
-            case NEVER_OPENED:
-                return BODY_NEVER_OPENED.replace("%name%", name)
-                        .replace("%topic%", topicName)
-                        .replace("%mail%", FROM_EMAIL);
-            case CLOSED:
-                return BODY_CLOSED.replace("%name%", name)
-                        .replace("%topic%", topicName)
-                        .replace("%mail%", FROM_EMAIL);
-        }
-        return null;
+
+        return getBody(role, notificationType).replace("%name%", name)
+                .replace("%topic%", topicName)
+                .replace("%chat%", chat)
+                .replace("%mail%", FROM_EMAIL);
     }
 
     private CustomMessage buildMessage(Collaborator collaborator, Topic topic, Role role, NotificationType notificationType) {
