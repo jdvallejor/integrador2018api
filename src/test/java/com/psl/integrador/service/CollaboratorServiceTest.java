@@ -31,7 +31,7 @@ public class CollaboratorServiceTest {
     @Autowired
     private TopicRepository topicRepository;
 
-    @Test
+    /*@Test
     public void getCollaborators() {
         int collaborators = collaboratorService.getCollaborators().size();
 
@@ -42,7 +42,7 @@ public class CollaboratorServiceTest {
         assertEquals(collaborators + 1, collaboratorService.getCollaborators().size());
 
         collaboratorRepository.delete(c);
-    }
+    }*/
 
     @Test
     public void getCollaboratorsByTopic() {
