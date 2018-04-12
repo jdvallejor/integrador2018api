@@ -26,41 +26,38 @@ public class TopicServiceTest {
     @Autowired
     private TopicRepository topicRepository;
 
-
-
-    @After
-    public void tearDown() {
-        topicRepository.deleteAll();
-    }
-
-
     @Test
     public void getTopicsByStatus() {
         Topic t1 = new Topic();
         t1.setName("Topic 1");
         t1.setDescription("Description 1");
         t1.setStatus(TO_OPEN);
-        topicService.add(t1);
+        t1 = topicService.add(t1);
 
         Topic t2 = new Topic();
         t2.setName("Topic 2");
         t2.setDescription("Description 2");
         t2.setStatus(OPENED);
-        topicService.add(t2);
+        t2 = topicService.add(t2);
 
         Topic t3 = new Topic();
         t3.setName("Topic 3");
         t3.setDescription("Description 3");
         t3.setStatus(CLOSED);
-        topicService.add(t3);
+        t3 = topicService.add(t3);
 
         Topic t4 = new Topic();
         t4.setName("Topic 4");
         t4.setDescription("Description 4");
         t4.setStatus(CLOSED);
-        topicService.add(t4);
+        t4 = topicService.add(t4);
 
         assertEquals(2, topicService.getTopicsByStatus(CLOSED.ordinal()).size());
+
+        topicRepository.delete(t1);
+        topicRepository.delete(t2);
+        topicRepository.delete(t3);
+        topicRepository.delete(t4);
        // assertEquals(1, topicService.getTopicsByStatus(OPENED.ordinal()).size());
        // assertEquals(1, topicService.getTopicsByStatus(TO_OPEN.ordinal()).size());
     }
@@ -72,25 +69,51 @@ public class TopicServiceTest {
         t1.setDescription("Description");
         t1.setStatus(TO_OPEN);
 
-        assertThat(t1, samePropertyValuesAs(topicService.add(t1)));
+        Topic t = topicService.add(t1);
+
+        assertThat(t1, samePropertyValuesAs(t));
+
+        topicRepository.delete(t);
     }
 
     @Test
-    public void update() {
+    public void updateStatusExistingTopic() throws Exception{
         Topic t1 = new Topic();
-        t1.setName("Topic 1");
-        t1.setDescription("Description 1");
         t1.setStatus(TO_OPEN);
-        Topic t2 = topicService.add(t1);
-        t2.setName("Topic 1");
-        t2.setDescription("Description 1");
-        t2.setStatus(TO_OPEN);
+        t1 = topicService.add(t1);
+        t1.setStatus(OPENED);
 
+        Topic t2 = new Topic();
+        t2.setStatus(TO_OPEN);
+        t2 = topicService.add(t2);
+        t2.setStatus(CLOSED);
+
+        Topic t3 = new Topic();
+        t3.setStatus(OPENED);
+        t3 = topicService.add(t3);
+        t3.setStatus(CLOSED);
+
+        assertEquals(t1.getStatus(), topicService.update(t1).getStatus());
+        assertEquals(t2.getStatus(), topicService.update(t2).getStatus());
+        assertEquals(t3.getStatus(), topicService.update(t3).getStatus());
+
+        topicRepository.delete(t1);
+        topicRepository.delete(t2);
+        topicRepository.delete(t3);
+    }
+
+    @Test
+    public void updateNoExistingTopic() {
+        boolean thrown = false;
         try {
-            assertThat(t2, samePropertyValuesAs(topicService.update(t2)));
-        }catch (EntityNotFoundException ex){
-            fail(ex.getMessage());
+            Topic t = new Topic();
+            topicService.update(t);
         }
+        catch (EntityNotFoundException e) {
+            thrown = true;
+        }
+
+        assertTrue(thrown);
     }
 
     @Test
@@ -102,5 +125,7 @@ public class TopicServiceTest {
         Topic t2 = topicService.add(t1);
 
         assertThat(t2, samePropertyValuesAs(topicService.getTopicById(t2.getId())));
+
+        topicRepository.delete(t2);
     }
 }
