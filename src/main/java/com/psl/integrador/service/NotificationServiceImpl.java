@@ -85,9 +85,9 @@ public class NotificationServiceImpl implements NotificationService {
     }
 
     private String getBody(Role role, NotificationType notificationType){
-        if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.STUDENT))
+        if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.LEARNING))
             return BODY_LEARNING;
-        else if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.TEACHER))
+        else if (notificationType.equals(NotificationType.OPEN) && role.equals(Role.GUIDING))
             return BODY_GUIDING;
         else if (notificationType.equals(NotificationType.NEVER_OPENED))
             return BODY_NEVER_OPENED;
@@ -132,8 +132,8 @@ public class NotificationServiceImpl implements NotificationService {
         msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
         msg.addHeader("format", "flowed");
         msg.addHeader("Content-Transfer-Encoding", "8bit");
-        msg.setFrom(new InternetAddress("praxistestmailintegrator2018@gmail.com", "NoReply-JD"));
-        msg.setReplyTo(InternetAddress.parse("praxistestmailintegrator2018@gmail.com", false));
+        msg.setFrom(new InternetAddress(FROM_EMAIL, "NoReply-JD"));
+        msg.setReplyTo(InternetAddress.parse(FROM_EMAIL, false));
 
         msg.setSubject(message.getSubject(), "UTF-8");
         msg.setText(message.getBody(), "UTF-8");

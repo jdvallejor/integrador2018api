@@ -36,12 +36,12 @@ public class CollaboratorServiceImpl implements CollaboratorService {
         for (Collaborator collaborator : getCollaborators()) {
             for (Detail detail : collaborator.getTopicsToLearn()) {
                 if (detail.getTopic().getId().equals(topic.getId())) {
-                    collaboratorIntegerMap.put(collaborator, Role.STUDENT);
+                    collaboratorIntegerMap.put(collaborator, Role.LEARNING);
                 }
             }
             for (Detail detail : collaborator.getTopicsToTeach()) {
                 if (detail.getTopic().getId().equals(topic.getId())) {
-                    collaboratorIntegerMap.put(collaborator, Role.TEACHER);
+                    collaboratorIntegerMap.put(collaborator, Role.GUIDING);
                 }
             }
         }

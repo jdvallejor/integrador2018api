@@ -30,10 +30,10 @@ public class NotificationServiceImplTest {
         Map<Collaborator, Role> collaborators = new HashMap<>();
         Collaborator collaborator = new Collaborator();
         collaborator.setEmail("col1@samplemail.com");
-        collaborators.put(collaborator,Role.STUDENT);
+        collaborators.put(collaborator,Role.LEARNING);
         collaborator = new Collaborator();
         collaborator.setEmail("col2@samplemail.com");
-        collaborators.put(collaborator,Role.TEACHER);
+        collaborators.put(collaborator,Role.GUIDING);
 
         Mockito.when(collaboratorService.getCollaboratorsByTopic(new Topic()))
                 .thenReturn(collaborators);

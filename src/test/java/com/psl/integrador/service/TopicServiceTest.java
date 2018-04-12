@@ -28,6 +28,11 @@ public class TopicServiceTest {
 
     @Test
     public void getTopicsByStatus() {
+
+        int topicsClosed = topicService.getTopicsByStatus(CLOSED.ordinal()).size();
+        int topicsOpen = topicService.getTopicsByStatus(OPENED.ordinal()).size();
+        int topicsToOpen = topicService.getTopicsByStatus(TO_OPEN.ordinal()).size();
+
         Topic t1 = new Topic();
         t1.setName("Topic 1");
         t1.setDescription("Description 1");
@@ -52,14 +57,14 @@ public class TopicServiceTest {
         t4.setStatus(CLOSED);
         t4 = topicService.add(t4);
 
-        assertEquals(2, topicService.getTopicsByStatus(CLOSED.ordinal()).size());
+        assertEquals(topicsOpen + 1, topicService.getTopicsByStatus(OPENED.ordinal()).size());
+        assertEquals(topicsToOpen + 1, topicService.getTopicsByStatus(TO_OPEN.ordinal()).size());
+        assertEquals(topicsClosed + 2, topicService.getTopicsByStatus(CLOSED.ordinal()).size());
 
         topicRepository.delete(t1);
         topicRepository.delete(t2);
         topicRepository.delete(t3);
         topicRepository.delete(t4);
-       // assertEquals(1, topicService.getTopicsByStatus(OPENED.ordinal()).size());
-       // assertEquals(1, topicService.getTopicsByStatus(TO_OPEN.ordinal()).size());
     }
 
     @Test
@@ -71,9 +76,9 @@ public class TopicServiceTest {
 
         Topic t = topicService.add(t1);
 
-        assertThat(t1, samePropertyValuesAs(t));
-
         topicRepository.delete(t);
+
+        assertThat(t1, samePropertyValuesAs(t));
     }
 
     @Test
