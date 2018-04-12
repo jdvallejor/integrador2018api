@@ -73,10 +73,10 @@ public class CollaboratorServiceTest {
         c1 = collaboratorRepository.save(c1);
         c2 = collaboratorRepository.save(c2);
 
-        Map<Collaborator, Role> m = collaboratorService.getCollaboratorsByTopic(t1);
+        /*Map<Collaborator, Role> m = collaboratorService.getCollaboratorsByTopic(t1);
 
         Role guiding = m.get(c1);
-        Role learning = m.get(c2);
+        Role learning = m.get(c2);*/
 
         collaboratorRepository.delete(c1);
         collaboratorRepository.delete(c2);
